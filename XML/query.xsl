@@ -40,13 +40,18 @@
 <xsl:template match="item">
 		<tr>
 			<td><xsl:value-of select="isbn" /></td>
-  		<td><xsl:value-of select="title" /></td>
+			<td>
+			<a>
+        <xsl:attribute name="href">
+            <xsl:value-of select="concat('/~shopetan/markuplang/2015_0615/detail/',@no,'.html')"/>
+        </xsl:attribute>
+				<xsl:value-of select="title" />
+			</a></td>
   		<td><xsl:value-of select="creator" /></td>
 			<td><xsl:value-of select="publisher" /></td>
   		<td><xsl:value-of select="date/year" />-<xsl:value-of select="date/month" />-<xsl:value-of select="date/day" /></td>
 			<td><xsl:value-of select="keywords/keyword" /></td>
 		</tr>
-
 </xsl:template>
 
 
