@@ -43,9 +43,7 @@
 			<td><xsl:value-of select="isbn" /></td>
 			<td>
 			<a>
-        <xsl:attribute name="href">
-					<xsl:value-of select="concat('/~shopetan/markuplang/2015_0615/detail/',@no,'.html')"/>
-	      </xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="concat('https://www.google.co.jp/#q=',title)"/></xsl:attribute>
 				<xsl:value-of select="title" />
 			</a></td>
   		<td><xsl:value-of select="creator" /></td>
