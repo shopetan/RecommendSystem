@@ -14,13 +14,9 @@
 					<tr>
 						<th>ISBN</th>
 						<th>タイトル</th>
-						<th>著者</th>
-						<th>出版社</th>
-						<th>年 - 月 - 日</th>
-						<th>キーワード</th>
 					</tr>
 
-				<xsl:apply-templates select="books/item[contains(title,$title)]">
+				<xsl:apply-templates select="books/item[contains(title,$title)] or books/item[contains(creator,$creator)]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>
@@ -39,18 +35,14 @@
 			</xsl:template>
 
 <xsl:template match="item">
+
 		<tr>
 			<td><xsl:value-of select="isbn" /></td>
 			<td>
 			<a>
-        <xsl:attribute name="href"><xsl:value-of select="concat('https://www.google.co.jp/#q=',title)"/></xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="concat('/~shopetan/markuplang/2015_0615/detail/',@no,'.html')"/></xsl:attribute>
 				<xsl:value-of select="title" />
 			</a></td>
-  		<td><xsl:value-of select="creator" /></td>
-			<td><xsl:value-of select="publisher" /></td>
-  		<td><xsl:value-of select="date/year" />-<xsl:value-of select="date/month" />-<xsl:value-of select="date/day" /></td>
-			<td><xsl:value-of select="keywords/keyword"/></td>
-
 		</tr>
 		</xsl:template>
 
