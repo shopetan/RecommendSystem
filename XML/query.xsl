@@ -3,12 +3,17 @@
 <xsl:output method="html" encoding="UTF-8" />
 <xsl:param name="title"/>
 <xsl:param name="creator"/>
+<xsl:param name="publisher"/>
+<xsl:param name="year"/>
 
 <xsl:template match="/">
     <html>
 	     <body>
-				<xsl:value-of select="concat('Search Title : ', $title)"/>,
-				<xsl:value-of select="concat('Search Creator : ', $creator)"/>
+				<xsl:value-of select="concat('Search Title : ', $title)"/>
+				<br>
+					<xsl:value-of select="concat('Search Creator : ', $creator)"/>
+					<xsl:value-of select="concat('Search Publisher : ', $publisher)"/>
+					<xsl:value-of select="concat('Search Year : ', $year)"/>
 
 				<table border="1">
 					<tr>
@@ -16,7 +21,7 @@
 						<th>タイトル</th>
 					</tr>
 
-				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator)]">
+				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator) and contains(publisher,$publisher) and contains(year,$year)]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>

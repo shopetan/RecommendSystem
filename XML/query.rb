@@ -10,7 +10,9 @@ xslt.xml = "data0511.xml"
 xslt.xsl = "query.xsl"
 
 xslt.parameters = {"title" => cgi["title"],
-									 "creator" => cgi["creator"],}
+									 "creator" => cgi["creator"],
+									 "publisher" => cgi["publisher"],
+									 "year" => cgi["year"]}
 out = xslt.serve()
 print cgi.header("text/html; charset=UTF-8")
 print out
