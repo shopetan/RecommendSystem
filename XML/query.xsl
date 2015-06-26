@@ -9,11 +9,10 @@
 <xsl:template match="/">
     <html>
 	     <body>
-				<xsl:value-of select="concat('Search Title : ', $title)"/>
-				<br>
-					<xsl:value-of select="concat('Search Creator : ', $creator)"/>
-					<xsl:value-of select="concat('Search Publisher : ', $publisher)"/>
-					<xsl:value-of select="concat('Search Year : ', $year)"/>
+					<xsl:value-of select="concat('Title : ', $title)"/>,
+					<xsl:value-of select="concat('Creator : ', $creator)"/>,
+					<xsl:value-of select="concat('Publisher : ', $publisher)"/>,
+					<xsl:value-of select="concat('Year : ', $year)"/>
 
 				<table border="1">
 					<tr>
