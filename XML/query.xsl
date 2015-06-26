@@ -20,17 +20,12 @@
 						<th>キーワード</th>
 					</tr>
 
-				<xsl:apply-templates select="books/item[contains(title,$title)]">
+				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator)]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>
 				</xsl:apply-templates>
 
-				<xsl:apply-templates select="books/item[contains(creator,$creator)]">
-					<xsl:sort select="date/year" data-type="number" order="descending"/>
-					<xsl:sort select="date/month" data-type="number" order="descending"/>
-					<xsl:sort select="date/day" data-type="number" order="descending"/>
-					</xsl:apply-templates>
 
 				</table>
 
@@ -43,7 +38,7 @@
 			<td><xsl:value-of select="isbn" /></td>
 			<td>
 			<a>
-        <xsl:attribute name="href"><xsl:value-of select="concat('https://www.google.co.jp/#q=',title)"/></xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="concat('detail/',@no,'.html')"/></xsl:attribute>
 				<xsl:value-of select="title" />
 			</a></td>
   		<td><xsl:value-of select="creator" /></td>
