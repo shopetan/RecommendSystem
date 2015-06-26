@@ -20,13 +20,13 @@
 						<th>キーワード</th>
 					</tr>
 
-				<xsl:apply-templates select="books/item[title=$title]">
+				<xsl:apply-templates select="books/item[contains(title,$title)]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>
 				</xsl:apply-templates>
 
-				<xsl:apply-templates select="books/item[creator=$creator]">
+				<xsl:apply-templates select="books/item[contains(creator,$creator)]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>
