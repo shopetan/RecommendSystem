@@ -10,35 +10,46 @@
 				<xsl:value-of select="concat('Search Title : ', $title)"/>,
 				<xsl:value-of select="concat('Search Creator : ', $creator)"/>
 
+
 				<table border="1">
 					<tr>
 						<th>ISBN</th>
 						<th>タイトル</th>
+						<th>著者</th>
+						<th>出版社</th>
+            <th>価格</th>
+						<th>年 - 月 - 日</th>
+            <th>キーワード</th>
+            <th>説明</th>
 					</tr>
-
-				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator)]">
+				<xsl:apply-templates select="books/item">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>
 				</xsl:apply-templates>
 
-
 				</table>
 
-				</body>
-	    </html>
-			</xsl:template>
+      </body>
+    </html>
+</xsl:template>
 
 <xsl:template match="item">
-
 		<tr>
 			<td><xsl:value-of select="isbn" /></td>
 			<td>
 			<a>
-        <xsl:attribute name="href"><xsl:value-of select="concat('detail/',@no,'.html')"/></xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="url/@resource"/></xsl:attribute>
 				<xsl:value-of select="title" />
 			</a></td>
+  		<td><xsl:value-of select="creator" /></td>
+      <td><xsl:value-of select="publisher" /></td>
+      <td><xsl:value-of select="price" /></td>
+  		<td><xsl:value-of select="date/year" />-<xsl:value-of select="date/month" />-<xsl:value-of select="date/day" /></td>
+      <td><xsl:value-of select="keywords/keyword" /></td>
+      <td><xsl:value-of select="description" /></td>
 		</tr>
-		</xsl:template>
+</xsl:template>
+
 
 </xsl:stylesheet>
