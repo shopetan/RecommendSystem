@@ -6,7 +6,7 @@
 <xsl:template match="/">
     <html>
 	     <body>
-
+         <xsl:value-of select="$no" />
 				<table border="1">
 					<tr>
 						<th>ISBN</th>
@@ -15,9 +15,12 @@
 						<th>出版社</th>
             <th>価格</th>
 						<th>年 - 月 - 日</th>
-            <th>キーワード</th>
+            <th>キーワード1</th>
+            <th>キーワード2</th>
+            <th>キーワード3</th>
             <th>説明</th>
 					</tr>
+
 				<xsl:apply-templates select="books/item[@no = $no]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
@@ -38,11 +41,13 @@
         <xsl:attribute name="href"><xsl:value-of select="url/@resource"/></xsl:attribute>
 				<xsl:value-of select="title" />
 			</a></td>
-  		<td><xsl:value-of select="creator" /></td>
+      <td><xsl:value-of select="creator" /></td>
       <td><xsl:value-of select="publisher" /></td>
       <td><xsl:value-of select="price" /></td>
   		<td><xsl:value-of select="date/year" />-<xsl:value-of select="date/month" />-<xsl:value-of select="date/day" /></td>
-      <td><xsl:value-of select="keywords/keyword" /></td>
+      <td><xsl:value-of select="keywords/keyword[1]" /></td>
+      <td><xsl:value-of select="keywords/keyword[2]" /></td>
+      <td><xsl:value-of select="keywords/keyword[3]" /></td>
       <td><xsl:value-of select="description" /></td>
 		</tr>
 </xsl:template>

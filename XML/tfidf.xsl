@@ -5,14 +5,14 @@
 <xsl:template match="/">
   <html>
      <body>
-				<xsl:apply-templates select="books/item/keywords">
+				<xsl:apply-templates select="books/item">
 				</xsl:apply-templates>
 		</body>
 	</html>
 </xsl:template>
 
-<xsl:template match="keywords">
-	<xsl:value-of select="concat(keyword,',')"/>
+<xsl:template match="item">
+	<xsl:value-of select="description"/>
 </xsl:template>
 
 </xsl:stylesheet>
