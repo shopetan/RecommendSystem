@@ -4,15 +4,29 @@
 import MeCab,re
 import nltk
 
+def formatText():
+    fread = open('keywordDocuments.txt',"r")
+    fwrite = open('keywordDocuments2.txt',"w")
+    lines = fread.readlines()
+    fread.close
+    text = ""
+    for line in lines:
+        line = line.replace(('\r'or'\n'),'\r\n')
+        line = line.replace('\r\n','')
+        line = line.replace('\n','')
+        text += line
+
+    fwrite.write(text)
+    fwrite.close
+
 def readDocument():
-    f = open('documents.txt')
-    lines = f.readlines()
-    f.close
-
-    documents = []
-
+    documents = []    
+    fread = open('keywordDocuments2.txt',"r")
+    lines = fread.readlines()
+    fread.close
     for line in lines:
         documents.append(line)
+
     return documents
 
 
@@ -32,35 +46,41 @@ def getNounFromDocument(documents):
             node = node.next
         noun.append([])
         lineCount += 1
+    print "lineCount:%d" % lineCount
     return noun
 
-def writeTFIDFResultFromNouns(noun):
+def writeTFIDFResultFromNouns(noun,wordLimit):
     collection = nltk.TextCollection(noun)
     uniqTerms = list(set(collection))
     sortNoun = {}
 
-    f = open("descriptionNoun.txt","w")
+    f = open("keywordNoun.xml","w")
 
     for doc in noun:
         try:
             for term in uniqTerms:
                 sortNoun.update({term:collection.tf_idf(term, doc)})
-                # print "%s : %f" % (term, collection.tf_idf(term, doc))
         except ZeroDivisionError:
             print 'error!'
-        
     wordCount = 0
     for k, v in sorted(sortNoun.items(), key=lambda x:x[1],reverse=True):
-        if wordCount < 100:
-            if v > 0.0:
-                f.write(k.encode("utf-8"))
-                f.write(":")
-                f.write(str(v).encode("utf-8"))
-                f.write("\n")
+        if wordCount < wordLimit:
+            
+            f.write("<tags>")
+            f.write("<tag>")
+            f.write(k.encode("utf-8"))
+            f.write("</tag>")
+            f.write("<feature>")
+            f.write(str(v).encode("utf-8"))
+            f.write("</feature>")
+            f.write("</tags>")
+            f.write("\n")
             wordCount += 1
     f.close
+    return sorted(sortNoun.items(), key=lambda x:x[1],reverse=True)[:wordLimit]
 
+formatText()
+wordLimit = 100
 documents = readDocument()
 noun = getNounFromDocument(documents)
-
-writeTFIDFResultFromNouns(noun)
+tfidfDict = writeTFIDFResultFromNouns(noun,wordLimit)
