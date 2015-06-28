@@ -5,14 +5,28 @@ import MeCab,re
 import nltk
 
 def readDocument():
-    f = open('documents.txt')
-    lines = f.readlines()
-    f.close
-
+    fread = open('descriptionDocuments.txt',"r")
+    fwrite = open('descriptionDocuments2.txt',"w")
+    lines = fread.readlines()
+    fread.close
     documents = []
+    text = ""
 
     for line in lines:
+        line = line.replace(('\r'or'\n'),'\r\n')
+        line = line.replace('\r\n','')
+        line = line.replace('\n','')
+        text += line
+
+    fwrite.write(text)
+    fwrite.close
+
+    fread = open('descriptionDocuments2.txt',"r")
+    lines = fread.readlines()
+    fread.close
+    for line in lines:
         documents.append(line)
+
     return documents
 
 
@@ -32,6 +46,7 @@ def getNounFromDocument(documents):
             node = node.next
         noun.append([])
         lineCount += 1
+    print "lineCount:%d" % lineCount
     return noun
 
 def writeTFIDFResultFromNouns(noun):
@@ -45,22 +60,18 @@ def writeTFIDFResultFromNouns(noun):
         try:
             for term in uniqTerms:
                 sortNoun.update({term:collection.tf_idf(term, doc)})
-                # print "%s : %f" % (term, collection.tf_idf(term, doc))
         except ZeroDivisionError:
             print 'error!'
-        
     wordCount = 0
     for k, v in sorted(sortNoun.items(), key=lambda x:x[1],reverse=True):
         if wordCount < 100:
-            if v > 0.0:
-                f.write(k.encode("utf-8"))
-                f.write(":")
-                f.write(str(v).encode("utf-8"))
-                f.write("\n")
+            f.write(k.encode("utf-8"))
+            f.write(":")
+            f.write(str(v).encode("utf-8"))
+            f.write("\n")
             wordCount += 1
     f.close
 
 documents = readDocument()
 noun = getNounFromDocument(documents)
-
 writeTFIDFResultFromNouns(noun)
