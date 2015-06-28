@@ -12,7 +12,10 @@ xslt.xsl = "query.xsl"
 xslt.parameters = {"title" => cgi["title"],
 									 "creator" => cgi["creator"],
 									 "publisher" => cgi["publisher"],
-									 "year" => cgi["year"]}
+									 "year" => cgi["year"],
+									 "description" => cgi["description"],
+									 "keyword" => cgi["keyword"],
+									}
 out = xslt.serve()
 print cgi.header("text/html; charset=UTF-8")
 print out

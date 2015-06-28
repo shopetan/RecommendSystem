@@ -5,6 +5,9 @@
 <xsl:param name="creator"/>
 <xsl:param name="publisher"/>
 <xsl:param name="year"/>
+<xsl:param name="description"/>
+<xsl:param name="keyword"/>
+
 
 <xsl:template match="/">
     <html>
@@ -12,7 +15,9 @@
 					<xsl:value-of select="concat('Title : ', $title)"/>,
 					<xsl:value-of select="concat('Creator : ', $creator)"/>,
 					<xsl:value-of select="concat('Publisher : ', $publisher)"/>,
-					<xsl:value-of select="concat('Year : ', $year)"/>
+					<xsl:value-of select="concat('Year : ', $year)"/>,
+					<xsl:value-of select="concat('Description : ', $description)"/>,
+					<xsl:value-of select="concat('Keyword : ', $keyword)"/>
 
 				<table border="1">
 					<tr>
@@ -20,7 +25,7 @@
 						<th>タイトル</th>
 					</tr>
 
-				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator) and contains(publisher,$publisher) and contains(year,$year)]">
+				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator) and contains(publisher,$publisher) and contains(date/year,$year) and contains(description,$description) and contains(keywords/keyword[1],$keyword) and contains(keywords/keyword[2],$keyword) and contains(keywords/keyword[3],$keyword)]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>
