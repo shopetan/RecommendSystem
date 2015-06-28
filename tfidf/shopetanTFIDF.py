@@ -65,14 +65,16 @@ def writeTFIDFResultFromNouns(noun,wordLimit):
     wordCount = 0
     for k, v in sorted(sortNoun.items(), key=lambda x:x[1],reverse=True):
         if wordCount < wordLimit:
-            
             f.write("<tags>")
+            f.write("\n")
             f.write("<tag>")
             f.write(k.encode("utf-8"))
             f.write("</tag>")
+            f.write("\n")
             f.write("<feature>")
             f.write(str(v).encode("utf-8"))
             f.write("</feature>")
+            f.write("\n")
             f.write("</tags>")
             f.write("\n")
             wordCount += 1

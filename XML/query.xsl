@@ -25,7 +25,7 @@
 						<th>タイトル</th>
 					</tr>
 
-				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator) and contains(publisher,$publisher) and contains(date/year,$year) and contains(description,$description) and contains(keywords/keyword[1],$keyword) and contains(keywords/keyword[2],$keyword) and contains(keywords/keyword[3],$keyword)]">
+				<xsl:apply-templates select="books/item[contains(title,$title) and contains(creator,$creator) and contains(publisher,$publisher) and contains(date/year,$year) and contains(description,$description) and (contains(keywords/keyword[1],$keyword) or contains(keywords/keyword[2],$keyword) or contains(keywords/keyword[3],$keyword))]">
 					<xsl:sort select="date/year" data-type="number" order="descending"/>
 					<xsl:sort select="date/month" data-type="number" order="descending"/>
 					<xsl:sort select="date/day" data-type="number" order="descending"/>

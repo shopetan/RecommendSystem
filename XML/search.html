@@ -5,8 +5,8 @@
     <title>レコメンドサービス</title>
   </head>
   <body>
-    <h2>レコメンドサービスもどき</h2>
-    <p>このタイトルを見てる人はこんな本に興味があるかも?を検索します．</p>
+    <h2>検索</h2>
+    <p>複数条件であらゆる検索を可能にします．</p>
     <form method="GET" action="query.rb">
       タイトル:<input type="text" name="title" size="20"><br>
       著者    :<input type="text" name="creator" size="20"><br>
@@ -16,6 +16,18 @@
       キーワード    :<input type="text" name="keyword" size="20"><br>
       <input type="submit" value="送信">
       <input type="reset" value="keywordの欄を空にする">
+
+      <h2>HOT Keyword</h2>
+      <p>全データからキーワードを抽出し，TFIDFによる特徴量抽出で，今熱いキーワードを教えます．</p>
+      <a href="keywordTFIDF.html">HOT Keyword</a>
+      <h2>HOT Description</h2>
+      <p>全データから説明文の品詞(名詞)を抽出し，TFIDFによる特徴量抽出で，今熱いキーワードを教えます．</p>
+      <a href="descriptionTFIDF.html">HOT Description</a>
+
+      <h2>分析に用いた自作のプログラムはこちらから</h2>
+      <a href="https://github.com/shopetan/RecommendSystem/blob/master/tfidf/shopetanTFIDF.py">GitHub</a>
+
+
     </form>
   </body>
 </html>
